@@ -23,9 +23,7 @@ class DataLoader:
         with open(self.data_path) as f:
             self.train_data = json.load(f)
         res_array = []
+        target_num = 0
         for item in self.train_data:
-            target_num = 0
-            if self.target == item:
-                target_num = 1
             res_array.append(TrainData(target=target_num, number=int(item), data=self.train_data[item]))
         return res_array

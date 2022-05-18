@@ -11,13 +11,11 @@ class Neuron:
     def __get_weights(num_weights: int) -> np.array:
         return np.random.uniform(-1, 1, num_weights)
 
-    def train(self, train_data: List[TrainData], learning_rate: float = 0.1, epochs: int = 100) -> None:
-        for epoch in range(epochs):
-            for item in train_data:
-                signal_sum = self.__get_sum_for_weights(item.data)
-                output = self.__get_activation_function(signal_sum)
-                error = self.__get_error(item.target, output)
-                self.__normalize_weights(error, item.data, learning_rate)
+    def train(self, item: TrainData, learning_rate: float) -> None:
+        signal_sum = self.__get_sum_for_weights(item.data)
+        output = self.__get_activation_function(signal_sum)
+        error = self.__get_error(item.target, output)
+        self.__normalize_weights(error, item.data, learning_rate)
 
     def predict(self, data: List[int]) -> int:
         signal_sum = self.__get_sum_for_weights(data)
